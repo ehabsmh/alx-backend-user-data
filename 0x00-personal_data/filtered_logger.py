@@ -70,7 +70,8 @@ def get_db() -> MySQLConnection:
     return conn
 
 
-def main() -> None:
+def main():
+    """main entry point"""
     db = get_db()
     logger = get_logger()
     cursor = db.cursor()
