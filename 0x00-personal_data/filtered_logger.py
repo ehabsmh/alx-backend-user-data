@@ -66,5 +66,5 @@ def get_db() -> MySQLConnection:
                            password=psswd,
                            host=host,
                            database=db)
-    
+
     return conn
