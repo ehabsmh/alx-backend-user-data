@@ -4,7 +4,7 @@ from typing import List
 import re
 import logging
 from os import environ
-from mysql.connector import connection
+import mysql.connector
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -56,33 +56,21 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-def get_db() -> connection.MySQLConnection:
-    """Returns a connector to the database"""
-    username = environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
-    psswd = environ.get('PERSONAL_DATA_DB_PASSWORD', '')
-    host = environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
-    db = environ.get('PERSONAL_DATA_DB_NAME')
-    conn = connection.MySQLConnection(user=username,
-                                      password=psswd,
-                                      host=host,
-                                      database=db)
-
-    return conn
-
-def main():
+def get_db() -> mysql.connector.connection.MySQLConnection:
     """
-    main entry point
-    """
-    db = get_db()
-    logger = get_logger()
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM users;")
-    fields = cursor.column_names
-    for row in cursor:
-        message = "".join("{}={}; ".format(k, v) for k, v in zip(fields, row))
-        logger.info(message.strip())
-    cursor.close()
-    db.close()
+    Returns a MySQLConnection object for accessing Personal Data database
 
-if __name__ == "__main__":
-    main()
+    Returns:
+        A MySQLConnection object using connection details from
+        environment variables
+    """
+    username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+    host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = environ.get("PERSONAL_DATA_DB_NAME")
+
+    cnx = mysql.connector.connection.MySQLConnection(user=username,
+                                                     password=password,
+                                                     host=host,
+                                                     database=db_name)
+    return cnx
