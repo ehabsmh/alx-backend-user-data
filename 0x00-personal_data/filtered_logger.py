@@ -44,18 +44,6 @@ class RedactingFormatter(logging.Formatter):
                             self.SEPARATOR)
 
 
-def get_logger() -> logging.Logger:
-    """returns a logging.Logger object."""
-    logger = logging.getLogger("user_data")
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-    stream_handler = logging.StreamHandler()
-    logger.addHandler(stream_handler)
-    fmt = RedactingFormatter(PII_FIELDS)
-    stream_handler.setFormatter(fmt)
-    return logger
-
-
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     Returns a MySQLConnection object for accessing Personal Data database
@@ -69,8 +57,20 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = environ.get("PERSONAL_DATA_DB_NAME")
 
-    cnx = mysql.connector.connection.MySQLConnection(user=username,
+    conn = mysql.connector.connection.MySQLConnection(user=username,
                                                      password=password,
                                                      host=host,
                                                      database=db_name)
-    return cnx
+    return conn
+
+
+def get_logger() -> logging.Logger:
+    """returns a logging.Logger object."""
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    stream_handler = logging.StreamHandler()
+    logger.addHandler(stream_handler)
+    fmt = RedactingFormatter(PII_FIELDS)
+    stream_handler.setFormatter(fmt)
+    return logger
