@@ -2,7 +2,7 @@
 """ 6. Basic auth
 """
 from flask import request
-from typing import List, TypeVar
+from typing import Tuple
 from api.v1.auth.auth import Auth
 import base64
 
@@ -35,3 +35,19 @@ class BasicAuth(Auth):
             return None
         else:
             return decoded_bytes
+
+    # ___________________________________________________________________________
+
+    def extract_user_credentials(self, decoded_b64_auth_h: str
+                                 ) -> Tuple[str, str]:
+        """ Returns the user email and password from the Base64 decoded value.
+        """
+        if not decoded_b64_auth_h or type(decoded_b64_auth_h) is not str:
+            return (None, None)
+
+        splitted_auth_header = decoded_b64_auth_h.split(':')
+        if (len(splitted_auth_header) != 2):
+            return (None, None)
+
+        user_email, pw = splitted_auth_header
+        return (user_email, pw)
