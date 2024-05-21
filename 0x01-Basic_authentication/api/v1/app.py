@@ -18,19 +18,23 @@ auth_type = getenv('AUTH_TYPE')
 if auth_type == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
-        
+
+
 @app.before_request
 def before_request_handler():
+    """Validate all requests"""
     if not auth:
         return
-    
-    excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+
+    excluded_paths = [
+        '/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/'
+    ]
 
     request_require_auth = auth.require_auth(request.path, excluded_paths)
 
     if not request_require_auth:
         return
-    
+
     if not auth.current_user(request):
         abort(403)
 
