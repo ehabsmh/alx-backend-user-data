@@ -22,15 +22,15 @@ class BasicAuth(Auth):
         return auth_header.split(' ')[1]
 
     # ___________________________________________________________________________
-    
-    def decode_base64_authorization_header(self, base64_auth_header: str) -> str:
-        """ Returns the decoded value of a Base64 string @base64_auth_header"""
-        if not base64_auth_header or type(base64_auth_header) is not str:
+
+    def decode_base64_authorization_header(self, b64_auth_header: str) -> str:
+        """ Returns the decoded value of a Base64 string @b64_auth_header"""
+        if not b64_auth_header or type(b64_auth_header) is not str:
             return None
-        
+
         decoded_bytes = ''
         try:
-            decoded_bytes = base64.b64decode(base64_auth_header).decode('utf8')
+            decoded_bytes = base64.b64decode(b64_auth_header).decode('utf8')
         except Exception:
             return None
         else:
