@@ -97,5 +97,5 @@ class BasicAuth(Auth):
         user = self.user_object_from_credentials(*creds)
         if not user:
             return None
-        
+
         return user
