@@ -34,6 +34,9 @@ def before_request_handler():
 
     if not request_require_auth:
         return
+    
+    if not auth.authorization_header(request):
+        abort(401)
 
     if not auth.current_user(request):
         abort(403)
