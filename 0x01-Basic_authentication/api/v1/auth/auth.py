@@ -10,15 +10,31 @@ class Auth:
     """ Template for all authentication system
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Determines if a given path requires authentication
+        """ Determines if a given path requires authentication.
+
         Args:
             @path: The requested path.
             @excluded_path: A list of paths that do not require auth.
+
+        Returns True:
+
+            * If no path passed.
+
+            * If @excluded_paths is None or empty
+
+            * If @path not in @excluded_paths
+
+        False:
+
+            * If @path is in @excluded_paths
         """
         if not excluded_paths or not path:
             return True
 
         cleaned_paths = []
+
+        # If the path not ends with "/" then we should omit the last "/"
+        # from all excluded_paths
         if not re.search('/$', path):
             for excluded_path in excluded_paths:
                 if re.search('/$', excluded_path):
@@ -27,7 +43,7 @@ class Auth:
         else:
             cleaned_paths = excluded_paths
 
-        if path not in cleaned_paths or not path:
+        if path not in cleaned_paths:
             return True
 
         return False
@@ -36,6 +52,7 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """ Extracts the Authorization header from the request
+
         Args:
             @request: the flask request object.
         """
