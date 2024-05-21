@@ -48,10 +48,10 @@ class Auth:
         Args:
             @request: the flask request object.
         """
-        if request and request.headers.get('Authorization'):
-            return request.headers.get('Authorization')
+        if not request:
+            return None
 
-        return None
+        return request.headers.get('Authorization')
 
     # _______________________________________________________________________________
 
