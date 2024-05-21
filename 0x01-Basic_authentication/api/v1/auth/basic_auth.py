@@ -2,8 +2,9 @@
 """ 6. Basic auth
 """
 from flask import request
-from typing import Tuple
+from typing import Tuple, TypeVar
 from api.v1.auth.auth import Auth
+from models.user import User
 import base64
 
 
@@ -51,3 +52,28 @@ class BasicAuth(Auth):
 
         user_email, pw = splitted_auth_header
         return (user_email, pw)
+
+    # ___________________________________________________________________________
+
+    def user_object_from_credentials(self, user_email: str, user_pwd: str
+                                     ) -> TypeVar('User'):
+        """ Returns the User instance based on his email and password.
+        """
+
+        if not user_email or type(user_email) is not str \
+           or not user_pwd or type(user_pwd) is not str:
+            return None
+
+        try:
+            user = User.search({"email": user_email})
+        except Exception:
+            return None
+
+        if not user:
+            return None
+
+        user = user[0]
+        if not user.is_valid_password(user_pwd):
+            return None
+
+        return user
