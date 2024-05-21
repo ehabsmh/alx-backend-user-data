@@ -31,3 +31,10 @@ def unauthorized():
     """ Aborts with 401 status code
     """
     abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden():
+    """ Aborts with 403 status code
+    """
+    abort(403)
