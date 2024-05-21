@@ -3,6 +3,7 @@
 Route module for the API
 """
 from os import getenv
+from api.v1.auth.auth import Auth
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
@@ -16,13 +17,12 @@ auth = None
 auth_type = getenv('AUTH_TYPE')
 
 if auth_type == 'auth':
-    from api.v1.auth.auth import Auth
     auth = Auth()
 
 
 @app.before_request
 def before_request_handler():
-    """Validate all requests"""
+    """Filter requests"""
     if not auth:
         return
 

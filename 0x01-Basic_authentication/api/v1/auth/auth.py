@@ -31,22 +31,14 @@ class Auth:
         if not excluded_paths or not path:
             return True
 
-        cleaned_paths = []
+        path_with_slash = path
+        if path[-1] != '/':
+            path_with_slash += '/'
 
-        # If the path not ends with "/" then we should omit the last "/"
-        # from all excluded_paths
-        if not re.search('/$', path):
-            for excluded_path in excluded_paths:
-                if re.search('/$', excluded_path):
-                    cleaned_path = re.sub('/$', '', excluded_path)
-                    cleaned_paths.append(cleaned_path)
-        else:
-            cleaned_paths = excluded_paths
+        if path in excluded_paths or path_with_slash in excluded_paths:
+            return False
 
-        if path not in cleaned_paths:
-            return True
-
-        return False
+        return True
 
     # _______________________________________________________________________________
 
