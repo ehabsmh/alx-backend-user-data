@@ -18,13 +18,12 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth_type = getenv('AUTH_TYPE')
 
-match auth_type:
-    case "basic_auth":
-        auth = BasicAuth()
-    case "session_auth":
-        auth = SessionAuth()
-    case _:
-        auth = Auth()
+if auth_type == 'basic_auth':
+    auth = BasicAuth()
+elif auth_type == 'session_auth':
+    auth = SessionAuth()
+else:
+    auth = Auth()
 
 
 @app.before_request
