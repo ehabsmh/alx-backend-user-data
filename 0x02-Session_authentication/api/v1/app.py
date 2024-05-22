@@ -25,7 +25,6 @@ match auth_type:
         auth = SessionAuth()
     case _:
         auth = Auth()
-    
 
 
 @app.before_request
