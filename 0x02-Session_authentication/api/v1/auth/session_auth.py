@@ -12,7 +12,7 @@ class SessionAuth(Auth):
 
     def create_session(self, user_id: str = None) -> str:
         """Creates a session id for authenticated user"""
-        if not user_id and not isinstance(user_id, str):
+        if not user_id or not isinstance(user_id, str):
             return None
 
         session_id = str(uuid4())
