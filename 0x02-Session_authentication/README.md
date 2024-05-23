@@ -115,3 +115,13 @@ Now you an “in-memory” Session ID storing. You will be able to retrieve an `
   - You must use `.get()` built-in for accessing in a dictionary a value based on key
 
 Now you have 2 methods (`create_session` and `user_id_for_session_id`) for storing and retrieving a link between a `User` ID and a Session ID.
+
+---
+
+### [4. Session cookie](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x02-Session_authentication/api/v1/auth/auth.py)
+Update `api/v1/auth/auth.py` by adding the method `def session_cookie(self, request=None):` that returns a cookie value from a request:
+
+Return `None` if `request` is `None`
+Return the value of the cookie named `_my_session_id` from `request` - the name of the cookie must be defined by the environment variable `SESSION_NAME`
+You must use `.get()` built-in for accessing the cookie in the request cookies dictionary
+You must use the environment variable `SESSION_NAME` to define the name of the cookie used for the Session ID
