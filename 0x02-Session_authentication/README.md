@@ -125,3 +125,11 @@ Return `None` if `request` is `None`
 Return the value of the cookie named `_my_session_id` from `request` - the name of the cookie must be defined by the environment variable `SESSION_NAME`
 You must use `.get()` built-in for accessing the cookie in the request cookies dictionary
 You must use the environment variable `SESSION_NAME` to define the name of the cookie used for the Session ID
+
+---
+
+### [5. Before request](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x02-Session_authentication/api/v1/app.py)
+Update the `@app.before_request` method in `api/v1/app.py`:
+
+Add the URL path `/api/v1/auth_session/login/` in the list of excluded paths of the method `require_auth` - this route doesn’t exist yet but it should be accessible outside authentication
+If `auth.authorization_header(request)` and `auth.session_cookie(request)` return `None`, `abort(401)`
