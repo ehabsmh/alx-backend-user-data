@@ -33,7 +33,8 @@ def before_request_handler():
         return
 
     excluded_paths = [
-        '/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/'
+        '/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/',
+        '/api/v1/auth_session/login/'
     ]
 
     request_require_auth = auth.require_auth(request.path, excluded_paths)
@@ -41,7 +42,8 @@ def before_request_handler():
     if not request_require_auth:
         return
 
-    if not auth.authorization_header(request):
+    if (not auth.authorization_header(request)
+       and not auth.session_cookie(request)):
         abort(401)
 
     user = auth.current_user(request)
