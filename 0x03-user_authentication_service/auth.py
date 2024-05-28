@@ -86,8 +86,10 @@ class Auth:
 
     def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """ Finds user by session ID
+
         Returns The corresponding User or None.
         If the session ID is None or no user is found, return None.
+
         Otherwise return the corresponding user.
         """
         try:
