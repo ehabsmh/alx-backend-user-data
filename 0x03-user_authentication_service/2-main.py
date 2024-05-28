@@ -15,11 +15,11 @@ user = my_db.add_user("test@test.com", "PwdHashed")
 print(user.id)
 
 find_user = my_db.find_user_by(email="test@test.com")
-print("USER_ID ===>", find_user.id)
+print(find_user.id)
 
 try:
     find_user = my_db.find_user_by(email="test2@test.com")
-    print("USER_ID ===>", find_user.id)
+    print(find_user.id)
 except NoResultFound:
     print("Not found")
 
