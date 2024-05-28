@@ -25,7 +25,7 @@ test it with [0-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/m
 
 ---
 
-[1. create user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
+### [1. create user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
 In this task, you will complete the `DB` class provided below to implement the `add_user` method.
 ```py
 """DB module
@@ -67,7 +67,7 @@ test it with [1-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/m
 
 ---
 
-[2. Find user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
+### [2. Find user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
 In this task you will implement the `DB.find_user_by` method. This method takes in arbitrary keyword arguments and returns the first row found in the `users` table as filtered by the method’s input arguments. No validation of input arguments required at this point.
 
 Make sure that SQLAlchemy’s `NoResultFound` and `InvalidRequestError` are raised when no results are found, or when wrong query arguments are passed, respectively.
@@ -78,14 +78,14 @@ Warning:
 
 ---
 
-[4. Hash password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+### [4. Hash password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
 In this task you will define a `_hash_password` method that takes in a `password` string arguments and returns bytes.
 
 The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
 
 ---
 
-[5. Register user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+### [5. Register user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
 In this task, you will implement the `Auth.register_user` in the `Auth` class provided below:
 ```py
 from db import DB
@@ -108,7 +108,7 @@ If not, hash the password with `_hash_password`, save the user to the database u
 
 ---
 
-[6. Basic Flask app](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+### [6. Basic Flask app](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
 In this task, you will set up a basic Flask app.
 
 Create a Flask app that has a single `GET` route (`"/"`) and use `flask.jsonify` to return a JSON payload of the form:
@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
 ---
 
-[7. Register user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+### [7. Register user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
 In this task, you will implement the end-point to register a user. Define a `users` function that implements the `POST /users` route.
 
 Import the `Auth` object and instantiate it at the root of the module as such:
