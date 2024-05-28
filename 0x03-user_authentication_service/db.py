@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """DB module
 """
 from sqlalchemy import create_engine
@@ -12,7 +13,6 @@ from user import Base, User
 class DB:
     """DB class
     """
-
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
@@ -45,14 +45,33 @@ class DB:
 
     # ___________________________________________________________________
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs) -> User:
         """ Finds the first user matches the keyword wargs
         """
+        if not kwargs:
+            raise InvalidRequestError
         try:
             usr = self._session.query(User).filter_by(**kwargs).first()
             if not usr:
-                raise NoResultFound()
+                raise NoResultFound
         except InvalidRequestError:
             raise
 
         return usr
+
+    # ___________________________________________________________________
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ Uses find_user_by to locate the user to update,
+        then will update the user's attributes as passed in the method's
+        arguments then commit changes to the database.
+        If an argument that does not correspond to a user attribute is passed,
+        it raises a ValueError.
+        """
+        usr = self.find_user_by(id=user_id)
+        for k, v in kwargs.items():
+            if k not in User.__table__.columns:
+                raise ValueError
+            setattr(usr, k, v)
+        
+        self._session.commit()
