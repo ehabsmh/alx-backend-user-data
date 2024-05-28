@@ -32,7 +32,7 @@ def register():
     except InvalidRequestError:
         abort(400)
 
-    return jsonify({{"email": email, "message": "user created"}})
+    return jsonify({"email": email, "message": "user created"})
 
 
 if __name__ == "__main__":
