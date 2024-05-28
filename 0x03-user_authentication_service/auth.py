@@ -54,7 +54,8 @@ class Auth:
     # ________________________________________________________________________
 
     def valid_login(self, email: str, password: str) -> bool:
-        """Validate the user in the database"""
+        """Validate the user in the database
+        """
         try:
             usr = self._db.find_user_by(email=email)
             if not checkpw(password.encode(), usr.hashed_password):
@@ -63,3 +64,20 @@ class Auth:
             return False
         else:
             return True
+
+    # ________________________________________________________________________
+    
+    def create_session(self, email: str) -> str:
+        """ Finds the user by email, generate a new UUID 
+        and store it in the database as the user's session_id.
+        Returns the session ID
+        """
+        session_id = _generate_uuid()
+        try:
+            usr = self._db.find_user_by(email=email)
+            usr.session_id = session_id
+        except Exception:
+            return None
+        else:
+            self._db._session.commit()
+            return session_id
