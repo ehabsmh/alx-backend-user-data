@@ -78,6 +78,15 @@ Warning:
 
 ---
 
+### [3. update user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
+n this task, you will implement the `DB.update_user` method that takes as argument a required `user_id` integer and arbitrary keyword arguments, and returns `None`.
+
+The method will use `find_user_by` to locate the user to update, then will update the user’s attributes as passed in the method’s arguments then commit changes to the database.
+
+If an argument that does not correspond to a user attribute is passed, raise a `ValueError`.
+
+---
+
 ### [4. Hash password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
 In this task you will define a `_hash_password` method that takes in a `password` string arguments and returns bytes.
 
@@ -149,3 +158,10 @@ Remember that you should only use `AUTH` in this app. `DB` is a lower abstractio
 In this task, you will implement the `Auth.valid_login` method. It should expect `email` and `password` required arguments and return a boolean.
 
 Try locating the user by email. If it exists, check the password with `bcrypt.checkpw`. If it matches return `True`. In any other case, return `False`.
+
+---
+
+### [9. Generate UUIDs](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task you will implement a `_generate_uuid` function in the `auth` module. The function should return a string representation of a new UUID. Use the `uuid` module.
+
+Note that the method is private to the `auth` module and should NOT be used outside of it.
