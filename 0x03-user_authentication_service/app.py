@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """6. Basic Flask app"""
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
 from sqlalchemy.exc import InvalidRequestError
 
 AUTH = Auth()
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@app.route('/', methods=['GET'])
 def index():
     """ Returns JSON payload of the form"""
     return jsonify({"message": "Bienvenue"})
@@ -17,7 +18,7 @@ def index():
 # ______________________________________________________________________________
 
 
-@app.route('/users', methods=['POST'], strict_slashes=False)
+@app.route('/users', methods=['POST'])
 def register():
     """Register endpoint for user authentication"""
     email = request.form.get("email")
@@ -33,6 +34,30 @@ def register():
         abort(400)
 
     return jsonify({"email": email, "message": "user created"})
+
+
+# ______________________________________________________________________________
+
+
+@app.route('/sessions', methods=['POST'])
+def login():
+    """ Creates a new session for the user, store the session ID as a cookie 
+    with key "session_id" on the response and return a JSON payload of the form.
+    Aborts with 401 status code if the login information is incorrect
+    """
+    email = request.form.get("email")
+    password = request.form.get("password")
+    if not email or not password:
+        abort(400)
+
+    if not AUTH.valid_login(email, password):
+        abort(401)
+
+    session_id = AUTH.create_session(email)
+    res = make_response(jsonify({"email": email, "message": "logged in"}))
+    res.set_cookie('session_id', session_id)
+
+    return res
 
 
 if __name__ == "__main__":
