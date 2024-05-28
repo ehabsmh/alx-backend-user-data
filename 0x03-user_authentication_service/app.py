@@ -41,9 +41,10 @@ def register():
 
 @app.route('/sessions', methods=['POST'])
 def login():
-    """ Creates a new session for the user, store the session ID as a cookie 
-    with key "session_id" on the response and return a JSON payload of the form.
-    Aborts with 401 status code if the login information is incorrect
+    """ Creates a new session for the user, store the session ID as a cookie
+    with key "session_id" on the response.
+    Returns a JSON payload of the form.
+    Aborts with 401 status code if the login information is incorrect.
     """
     email = request.form.get("email")
     password = request.form.get("password")
