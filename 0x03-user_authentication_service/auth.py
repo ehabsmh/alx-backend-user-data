@@ -95,9 +95,9 @@ class Auth:
             if not usr:
                 return None
         except NoResultFound:
+            return None
+        else:
             return usr
-
-        return usr
 
     # ________________________________________________________________________
 
