@@ -28,7 +28,7 @@ class Auth:
         Otherwise raise ValueError
         """
         try:
-            usr = self._db.find_user_by(email=email)
+            self._db.find_user_by(email=email)
         except NoResultFound:
             hashed_pw = _hash_password(password)
             usr = self._db.add_user(email, hashed_pw)
