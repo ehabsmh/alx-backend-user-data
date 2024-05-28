@@ -84,6 +84,7 @@ In this task you will define a `_hash_password` method that takes in a `password
 The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
 
 ---
+
 [5. Register user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
 In this task, you will implement the `Auth.register_user` in the `Auth` class provided below:
 ```py
@@ -104,3 +105,17 @@ Note that `Auth._db` is a private property and should NEVER be used from outside
 If a user already exist with the passed email, raise a `ValueError` with the message U`ser <user's email> already exists`.
 
 If not, hash the password with `_hash_password`, save the user to the database using `self._db` and return the `User` object.
+
+---
+
+[6. Basic Flask app](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+In this task, you will set up a basic Flask app.
+
+Create a Flask app that has a single `GET` route (`"/"`) and use `flask.jsonify` to return a JSON payload of the form:
+
+`{"message": "Bienvenue"}`
+Add the following code at the end of the module:
+```py
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
+```
