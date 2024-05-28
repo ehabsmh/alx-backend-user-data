@@ -6,6 +6,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from uuid import uuid4
+from typing import Union
 
 
 def _hash_password(password: str) -> bytes:
@@ -80,6 +81,20 @@ class Auth:
             return None
         else:
             return session_id
+
+    # ________________________________________________________________________
+
+    def get_user_from_session_id(self, session_id) -> Union[User, None]:
+        """ Finds user by session ID
+        Returns The corresponding User or None.
+        If the session ID is None or no user is found, return None.
+        Otherwise return the corresponding user.
+        """
+        usr = self._db.find_user_by(session_id=session_id)
+        if usr:
+            return usr
+
+        return None
 
     # ________________________________________________________________________
 
