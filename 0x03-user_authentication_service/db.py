@@ -73,5 +73,5 @@ class DB:
             if k not in User.__table__.columns:
                 raise ValueError
             setattr(usr, k, v)
-        
+
         self._session.commit()
