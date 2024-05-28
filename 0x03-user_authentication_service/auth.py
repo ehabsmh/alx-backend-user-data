@@ -5,6 +5,7 @@ from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
+from uuid import uuid4
 
 
 def _hash_password(password: str) -> bytes:
@@ -14,6 +15,18 @@ def _hash_password(password: str) -> bytes:
     return hashpw(password.encode(), gensalt())
 
 
+# ________________________________________________________________________________________
+
+
+def _generate_uuid():
+    """ Return a string representation of a new UUID.
+    """
+    return str(uuid4())
+
+
+# ________________________________________________________________________________________
+
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
@@ -21,7 +34,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    # ___________________________________________________________________
+    # ________________________________________________________________________
 
     def register_user(self, email: str, password: str) -> User:
         """ Returns a User object if the user not exists in the database
@@ -38,7 +51,7 @@ class Auth:
         else:
             raise ValueError(f"User {email} already exists")
 
-    # ___________________________________________________________________
+    # ________________________________________________________________________
 
     def valid_login(self, email: str, password: str) -> bool:
         """Validate the user in the database"""
