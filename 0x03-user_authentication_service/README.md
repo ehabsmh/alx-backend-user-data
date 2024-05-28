@@ -174,3 +174,27 @@ In this task, you will implement the `Auth.create_session` method. It takes an `
 The method should find the user corresponding to the email, generate a new UUID and store it in the database as the user's `session_id`, then return the session ID.
 
 Remember that only public methods of `self._db` can be used.
+
+---
+
+### [11. Log in](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task, you will implement a `login` function to respond to the `POST /sessions` route.
+
+The request is expected to contain form data with `"email"` and a `"password"` fields.
+
+If the login information is incorrect, use `flask.abort` to respond with a 401 HTTP status.
+
+Otherwise, create a new session for the user, store it the session ID as a cookie with key `"session_id"` on the response and return a JSON payload of the form
+`{"email": "<user email>", "message": "logged in"}`
+
+**Run this command to register:**
+
+`curl -XPOST localhost:5000/users -d 'email=bob@bob.com' -d 'password=mySuperPwd'`
+
+**Run this command to login:**
+
+`curl -XPOST localhost:5000/sessions -d 'email=bob@bob.com' -d 'password=mySuperPwd' -v`
+
+**Test to login with non-user:**
+
+`curl -XPOST localhost:5000/sessions -d 'email=bob@bob.com' -d 'password=BlaBla' -v`
