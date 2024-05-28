@@ -13,7 +13,9 @@ def index():
     """ Returns JSON payload of the form"""
     return jsonify({"message": "Bienvenue"})
 
+
 # ______________________________________________________________________________
+
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def register():
