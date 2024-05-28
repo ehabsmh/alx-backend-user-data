@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
+    """ Returns JSON payload of the form"""
     return jsonify({"message": "Bienvenue"})
 
 
