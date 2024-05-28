@@ -69,12 +69,16 @@ def logout():
     """ Logging out and deletes user session for the DB
     """
     session_id = request.cookies.get('session_id')
+    if not session_id:
+        abort(403)
+
     usr = AUTH.get_user_from_session_id(session_id)
     if not usr:
         abort(403)
 
     AUTH.destroy_session(usr.id)
-    return redirect('/')
+
+    return redirect("/")
 
 
 if __name__ == "__main__":
