@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """6. Basic Flask app"""
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
 from sqlalchemy.exc import InvalidRequestError
 
@@ -59,6 +59,22 @@ def login():
     res.set_cookie('session_id', session_id)
 
     return res
+
+
+# ______________________________________________________________________________
+
+
+@app.route('/sessions', methods=['DELETE'])
+def logout():
+    """ Logging out and deletes user session for the DB
+    """
+    session_id = request.cookies.get('session_id')
+    usr = AUTH.get_user_from_session_id(session_id)
+    if not usr:
+        abort(403)
+
+    AUTH.destroy_session(usr.id)
+    return redirect('/')
 
 
 if __name__ == "__main__":
