@@ -75,3 +75,10 @@ Make sure that SQLAlchemy’s `NoResultFound` and `InvalidRequestError` are rais
 Warning:
 
 - `NoResultFound` has been moved from `sqlalchemy.orm.exc` to `sqlalchemy.exc` between the version 1.3.x and 1.4.x of SQLAchemy - please make sure you are importing it from `sqlalchemy.orm.exc`
+
+---
+
+[4. Hash password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task you will define a `_hash_password` method that takes in a `password` string arguments and returns bytes.
+
+The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
