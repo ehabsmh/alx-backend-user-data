@@ -307,12 +307,12 @@ There's a `class User` that has class attributes:
 Here comes the power of [auth.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py) that has a full control over the database engine (db.py)
 
 
-- register_user() as the name says, it is responsible to add a user to the database to register it.
+- `register_user()`: as the name says, it is responsible to add a user to the database to register it.
 - valid_login() checks if the authentication is correct (email, password), if it is correct the user should be logged in.
-- create_session() it comes after the user has been logged in, as we said each authenticated user should hold a session so he can access protected routes.
-- get_user_from_session_id() this method is crucial in case the user wants to access some protected resource, the server should check if he is sending the session id back or not, so if he's sending it back, we know that he still can access this protected resource.
-- destroy_session() destroies the session, this is crucial when a user has been logged in, we don't want him to access the resources.
-- get_reset_password_token(): when a user decides to reset the password, the first step is to give him a session for this step. This is a security step, so not anyone can reset other's passwords.
-- update_password(): finally he can update his password, only if he has `reset_session`.
+- `create_session()`: it comes after the user has been logged in, as we said each authenticated user should hold a session so he can access protected routes.
+- `get_user_from_session_id()`: this method is crucial in case the user wants to access some protected resource, the server should check if he is sending the session id back or not, so if he's sending it back, we know that he still can access this protected resource.
+- `destroy_session()`: destroys the session, this is crucial when a user has been logged in, we don't want him to access the resources.
+- `get_reset_password_token()`: when a user decides to reset the password, the first step is to give him a session for this step. This is a security step, so not anyone can reset other's passwords.
+- `update_password()`: finally he can update his password, only if he has `reset_session`.
 
 [app.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py) defines the routes that the user accessing.
