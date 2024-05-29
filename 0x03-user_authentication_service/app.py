@@ -96,7 +96,6 @@ def profile():
         abort(403)
 
     usr = AUTH.get_user_from_session_id(session_id)
-    print(usr)
     if not usr:
         abort(403)
 
