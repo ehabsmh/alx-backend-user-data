@@ -122,3 +122,19 @@ class Auth:
             self._db.update_user(usr.id, reset_token=reset_token)
 
         return reset_token
+
+    # ________________________________________________________________________
+
+    def update_password(self, reset_token: str, password: str) -> None:
+        """ Finds user by reset_token if reset token found, hash password
+        and update user password to the newly hashed password and also
+        set the reset_token to none.
+        """
+        try:
+            usr = self._db.find_user_by(reset_token=reset_token)
+        except (NoResultFound, InvalidRequestError):
+            raise ValueError
+        else:
+            hashed_pw = _hash_password(password)
+            self._db.update_user(usr.id, hashed_password=hashed_pw,
+                                 reset_token=None)
