@@ -10,7 +10,7 @@ source auth_venv/bin/activate
 ```
 
 ## Tasks
-[0. User model](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/user.py)
+### [0. User model](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/user.py)
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping) of SQLAlchemy).
 
 The model will have the following attributes:
