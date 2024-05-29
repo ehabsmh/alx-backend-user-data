@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""User Authentication API"""
+""" User Authentication Routes
+"""
 from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
 from sqlalchemy.exc import InvalidRequestError
