@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""6. Basic Flask app"""
+"""User Authentication API"""
 from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
 from sqlalchemy.exc import InvalidRequestError
@@ -100,6 +100,21 @@ def profile():
         abort(403)
 
     return jsonify({"email": usr.email})
+
+
+# ______________________________________________________________________________
+
+@app.route('/reset_password', methods=['POST'])
+def get_reset_password_token():
+    """ Gets reset password token if user is found
+    """
+    email = request.form.get('email')
+    try:
+        reset_token = AUTH.get_reset_password_token(email)
+    except ValueError:
+        abort(403)
+    else:
+        return jsonify({"email": email, "reset_token": reset_token})
 
 
 # ______________________________________________________________________________
