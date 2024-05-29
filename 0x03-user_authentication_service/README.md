@@ -228,7 +228,7 @@ Find the user with the requested session ID. If the user exists destroy the sess
 
 ---
 
-### [14. Log out](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+### [15. User profile](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
 In this task, you will implement a `profile` function to respond to the `GET /profile` route.
 
 The request is expected to contain a `session_id` cookie. Use it to find the user. If the user exist, respond with a 200 HTTP status and the following JSON payload:
@@ -236,3 +236,41 @@ The request is expected to contain a `session_id` cookie. Use it to find the use
 `{"email": "<user email>"}`
 
 If the session ID is invalid or the user does not exist, respond with a 403 HTTP status.
+
+---
+
+### [16. Generate reset password token](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task, you will implement the `Auth.get_reset_password_token` method. It take an `email` string argument and returns a string.
+
+Find the user corresponding to the email. If the user does not exist, raise a `ValueError` exception. If it exists, generate a UUID and update the user's `reset_token` database field. Return the token.
+
+---
+
+### [17. Get reset password token](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+In this task, you will implement a `get_reset_password_token` function to respond to the `POST /reset_password` route.
+
+The request is expected to contain form data with the `"email"` field.
+
+If the email is not registered, respond with a 403 status code. Otherwise, generate a token and respond with a 200 HTTP status and the following JSON payload:
+
+`{"email": "<user email>", "reset_token": "<reset token>"}`
+
+---
+
+### [18. Update password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task, you will implement the `Auth.update_password` method. It takes `reset_token` string argument and a `password` string argument and returns `None`.
+
+Use the `reset_token` to find the corresponding user. If it does not exist, raise a `ValueError` exception.
+
+Otherwise, hash the password and update the user’s `hashed_password` field with the new hashed password and the `reset_token` field to `None`.
+
+---
+
+### [19. Update password end-point](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task you will implement the `update_password` function in the `app` module to respond to the `PUT /reset_password` route.
+
+The request is expected to contain form data with fields `"email"`, `"reset_token"` and `"new_password"`.
+
+Update the password. If the token is invalid, catch the exception and respond with a 403 HTTP code.
+
+If the token is valid, respond with a 200 HTTP code and the following JSON payload:
