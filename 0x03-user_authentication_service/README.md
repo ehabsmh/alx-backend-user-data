@@ -291,11 +291,11 @@ If the token is valid, respond with a 200 HTTP code and the following JSON paylo
 This authentication system is called Session-Based Authentication
 There's a `class User` that has class attributes:
 
-`id`: Each user should have a unique identifier so we can find a specific user easily
-`email`: user email
-`hashed_password`: user password should be hashed in the database to encrypt it.
-`session_id`: When a user is logged in, he should be identified that he's logged in and he's authorized to access any protected page, a `session_id` defines that.
-`reset_token`: Same the idea of session_id but in this case reset_token identifies a user wants to reset his password
+- `id`: Each user should have a unique identifier so we can find a specific user easily
+- `email`: user email
+- `hashed_password`: user password should be hashed in the database to encrypt it.
+- `session_id`: When a user is logged in, he should be identified that he's logged in and he's authorized to access any protected page, `session_id` defines that.
+- `reset_token`: Same the idea of session_id but in this case reset_token identifies a user wants to reset his password
 
 [db.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py) is the engine of the database, it is responsible to:
 - Create the database.
