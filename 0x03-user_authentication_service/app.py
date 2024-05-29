@@ -11,7 +11,8 @@ app.url_map.strict_slashes = False
 
 @app.route('/', methods=['GET'])
 def index():
-    """ Returns JSON payload of the form"""
+    """ Returns JSON payload of the form
+    """
     return jsonify({"message": "Bienvenue"})
 
 
@@ -20,7 +21,8 @@ def index():
 
 @app.route('/users', methods=['POST'])
 def register():
-    """Register endpoint for user authentication"""
+    """ Register endpoint for user authentication
+    """
     email = request.form.get("email")
     password = request.form.get("password")
     if not email or not password:
@@ -66,7 +68,7 @@ def login():
 
 @app.route('/sessions', methods=['DELETE'])
 def logout():
-    """ Logging out and deletes user session for the DB
+    """ Logging out and deletes user session from the DB
     """
     session_id = request.cookies.get('session_id')
     if not session_id:
@@ -79,6 +81,29 @@ def logout():
     AUTH.destroy_session(usr.id)
 
     return redirect("/")
+
+
+# ______________________________________________________________________________
+
+@app.route('/profile', methods=['GET'])
+def profile():
+    """ Finds if the user authorized to access profile page by checking
+    its session id.
+    If authorized, the user can access /profile, if not abort with 403 code
+    """
+    session_id = request.cookies.get('session_id')
+    if not session_id:
+        abort(403)
+
+    usr = AUTH.get_user_from_session_id(session_id)
+    print(usr)
+    if not usr:
+        abort(403)
+
+    return jsonify({"email": usr.email})
+
+
+# ______________________________________________________________________________
 
 
 if __name__ == "__main__":
