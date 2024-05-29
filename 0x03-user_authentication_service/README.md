@@ -76,6 +76,8 @@ Warning:
 
 - `NoResultFound` has been moved from `sqlalchemy.orm.exc` to `sqlalchemy.exc` between the version 1.3.x and 1.4.x of SQLAchemy - please make sure you are importing it from `sqlalchemy.orm.exc`
 
+test it with [2-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/2-main.py):
+
 ---
 
 ### [3. update user](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py)
@@ -85,12 +87,16 @@ The method will use `find_user_by` to locate the user to update, then will updat
 
 If an argument that does not correspond to a user attribute is passed, raise a `ValueError`.
 
+test it with [3-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/3-main.py):
+
 ---
 
 ### [4. Hash password](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
 In this task you will define a `_hash_password` method that takes in a `password` string arguments and returns bytes.
 
 The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
+
+test it with [4-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/1-main.py):
 
 ---
 
@@ -115,6 +121,8 @@ If a user already exist with the passed email, raise a `ValueError` with the mes
 
 If not, hash the password with `_hash_password`, save the user to the database using `self._db` and return the `User` object.
 
+test it with [5-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/5-main.py):
+
 ---
 
 ### [6. Basic Flask app](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
@@ -128,6 +136,7 @@ Add the following code at the end of the module:
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
 ```
+test it with [6-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/6-main.py):
 
 ---
 
@@ -151,6 +160,8 @@ If the user is already registered, catch the exception and return a JSON payload
 and return a 400 status code
 
 Remember that you should only use `AUTH` in this app. `DB` is a lower abstraction that is proxied by `Auth`.
+
+test it with [7-main.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/7-main.py):
 
 ---
 
