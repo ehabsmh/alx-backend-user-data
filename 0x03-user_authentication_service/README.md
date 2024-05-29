@@ -198,3 +198,41 @@ Otherwise, create a new session for the user, store it the session ID as a cooki
 **Test to login with non-user:**
 
 `curl -XPOST localhost:5000/sessions -d 'email=bob@bob.com' -d 'password=BlaBla' -v`
+
+---
+
+### [12. Find user by session ID](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task, you will implement the `Auth.get_user_from_session_id` method. It takes a single `session_id` string argument and returns the corresponding `User` or `None`.
+
+If the session ID is `None` or no user is found, return `None`. Otherwise return the corresponding user.
+
+Remember to only use public methods of `self._db`.
+
+---
+
+### [13. Destroy session](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py)
+In this task, you will implement `Auth.destroy_session`. The method takes a single `user_id` integer argument and returns `None`.
+
+The method updates the corresponding user’s session ID to `None`.
+
+Remember to only use public methods of `self._db`.
+
+---
+
+### [14. Log out](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+In this task, you will implement a `logout` function to respond to the `DELETE /sessions` route.
+
+The request is expected to contain the session ID as a cookie with key `"session_id"`.
+
+Find the user with the requested session ID. If the user exists destroy the session and redirect the user to `GET /`. If the user does not exist, respond with a 403 HTTP status.
+
+---
+
+### [14. Log out](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py)
+In this task, you will implement a `profile` function to respond to the `GET /profile` route.
+
+The request is expected to contain a `session_id` cookie. Use it to find the user. If the user exist, respond with a 200 HTTP status and the following JSON payload:
+
+`{"email": "<user email>"}`
+
+If the session ID is invalid or the user does not exist, respond with a 403 HTTP status.
