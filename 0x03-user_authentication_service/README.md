@@ -3,7 +3,7 @@
 </p>
 
 # This project implementing a User Authentication System
-**You should use `auth_venv` virtual environment as compiler to run python scripts:**
+**You should use `auth_venv` virtual environment's python interpreter to run python scripts:**
 
 ```bash
 source auth_venv/bin/activate
@@ -274,3 +274,34 @@ The request is expected to contain form data with fields `"email"`, `"reset_toke
 Update the password. If the token is invalid, catch the exception and respond with a 403 HTTP code.
 
 If the token is valid, respond with a 200 HTTP code and the following JSON payload:
+
+
+## Project Summary:
+This authentication system is called Session-Based Authentication
+There's a `class User` that has class attributes:
+
+`id`: Each user should have a unique identifier so we can find a specific user easily
+`email`: user email
+`hashed_password`: user password should be hashed in the database to encrypt it.
+`session_id`: When a user is logged in, he should be identified that he's logged in and he's authorized to access any protected page, a `session_id` defines that.
+`reset_token`: Same the idea of session_id but in this case reset_token identifies a user wants to reset his password
+
+[db.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/db.py) is the engine of the database, it is responsible to:
+- Create the database.
+- Create or drop tables.
+- Add user.
+- Update user.
+- Dynamically find a user.
+
+Here comes the power of [auth.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/auth.py) that has a full control over the database engine (db.py)
+
+
+- register_user() as the name says, it is responsible to add a user to the database to register it.
+- valid_login() checks if the authentication is correct (email, password), if it is correct the user should be logged in.
+- create_session() it comes after the user has been logged in, as we said each authenticated user should hold a session so he can access protected routes.
+- get_user_from_session_id() this method is crucial in case the user wants to access some protected resource, the server should check if he is sending the session id back or not, so if he's sending it back, we know that he still can access this protected resource.
+- destroy_session() destroies the session, this is crucial when a user has been logged in, we don't want him to access the resources.
+- get_reset_password_token(): when a user decides to reset the password, the first step is to give him a session for this step. This is a security step, so not anyone can reset other's passwords.
+- update_password(): finally he can update his password, only if he has `reset_session`.
+
+[app.py](https://github.com/ehabsmh/alx-backend-user-data/blob/main/0x03-user_authentication_service/app.py) defines the routes that the user accessing.
